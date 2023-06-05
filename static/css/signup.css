@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter');
+:root {
+    --bs-body-font-family: 'DM Sans', sans-serif;
+    --bs-body-font-family: 'Open Sans', sans-serif;
+    --bs-body-font-family: 'Inter';
+
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+
+}
+
+.form-control{
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 10px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 27px;
+
+    color: #000000;
+}
+
+
+.container-lg {
+
+    margin-top: 3%;
+
+    background: #ffffff;
+    border: 0.5px solid #000000;
+    border-radius: 20px;
+}
+
+.container1-lg {
+
+    margin-top: 3%;
+
+    background: #ffffff;
+    
+    width: 98%;
+    margin-left: 2.5%;
+    border-radius: 20px;
+}
+
+.row {
+    margin-left: 1%;
+
+}
+
+#registersingup {
+    border-radius: 10px;
+    background-color: #F29F05;
+    font-weight: bolder;
+    width: 20%;
+    outline: none;
+    border: none;
+
+    margin-left: 90%
+}
+
+#registersingup a {
+    text-decoration: none;
+    color: #ffffff
+}
+
+#registersingup:hover {
+    background-color: #A4D955;
+
+
+}
+
+#linknext {
+    text-decoration: none;
+    color: white;
+}
+
+#account {
+    text-decoration: none;
+    color: #F29F05;
+}
+
+#titleDreamsBank {
+
+
+    font-family: 'DM Sans';
+    font-style: bold;
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 49px;
+
+    color: #A4D955;
+}
+
+#subtitleCreateAccount {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 39px;
+
+    color: #000000;
+}
+
+#mandatoryObligatory {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+
+    color: #000000;
+}
+
+
+#labelName {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+
+    color: #000000;
+}
+
+#labelLastName {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+
+    color: #000000;
+}
+
+#labelEmail {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+
+    color: #000000;
+
+}
+
+#labelPassword {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+
+    color: #000000;
+}
+
+#labelCPassword {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+
+    color: #000000;
+}
+
+.account {
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.account p:hover {
+    color: #A4D955;
+}
+
+.account p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 21px;
+    color: #F29F05;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+#iconLema {
+    margin-left: 30%;
+    margin-top: 50%;
+    
+}
+
+
+#p1 {
+
+
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 42px;
+    color: #A1B97E;
+    margin-left: 30%;
+    
+
+}
+
+#p2 {
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 42px;
+    color: #558018;
+    margin-left: 30%;
+    
+    
+}
+
+#p3 {
+
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 42px;
+    color: #A4D955;
+    margin-left: 30%;
+   
+}

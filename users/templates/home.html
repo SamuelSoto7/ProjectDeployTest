@@ -1,0 +1,48 @@
+
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<link href="{% static 'home.css' %}" rel="stylesheet">
+<link href="{% static '_base.css' %}" rel="stylesheet">
+{% if user.is_authenticated %}
+  Welcome, {{ user.email }}!
+  <script>
+    window.location.href = "{% url 'scholarships:showmenu' %}";
+  </script>
+
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+<section class="container-fluid " id="rowb">
+  <div class="row w-100 mx-auto" id="imageb" >
+      <div class="col-lg-6 text-center">
+          <p id="text0">
+              <span class="p1"> La plataforma </span>
+               <br>
+               <span class="p2">donde tus sueños </span>
+               <br>
+               <span class="p3">se hacen realidad </span>
+           </p>
+           <p id="text1">
+               Publica tu solicitud de beca y cumple <br> tu sueño de estudiar o realiza una <br> donación y haz feliz a un estudiante. 
+           </p>
+
+           <button type="button" class="btn" id="donatebtn">
+            <a href="/../users/signup"  class="text-white text-decoration-none">Realizar <br> donacion</a>
+            </button>
+           <button type="button" class="btn">
+            <a href="/../users/signup"  class="text-white text-decoration-none" >Solicitar <br> beca</a>
+          </button>
+      </div>
+      <div class="col-lg-3" id="col1">
+          <img class="img-thumbnail" src="../media/icons/Image_Ref1.png" alt="No Encontrada" id="imagega"/>
+      </div>
+      <div class="col-lg-3">
+          <img class="img-thumbnail" src="../media/icons/Image_Ref2.png" alt="No Encontrada" id="imagega"/>
+      </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

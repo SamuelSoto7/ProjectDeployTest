@@ -1,0 +1,59 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Roboto+Condensed&display=swap');
+
+:root{
+    --bs-body-font-family:'DM Sans', sans-serif;
+}
+
+
+
+#imgex {
+    display: block;
+    margin-top: 5%;
+    margin-left: 5%;
+    width: 90%;
+    height:110%;
+    margin-bottom: 0;
+    
+}
+
+.container-fluid{
+    margin-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+
+}
+
+.form-control{
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 10px;
+}
+
+.forgotlink{
+    color: black;
+}
+
+#registerbtn{
+    margin-top: 10%;
+    margin-left: 25%;
+    border-radius: 10px;
+    background-color: #F29F05;
+    font-weight: bolder;
+    border:none;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    width: 50%;
+}
+
+#registerbtn:hover{
+    background-color: #A4D955;
+}
+
+h3{
+    color: #558018;
+    font-weight: bolder;
+}
+
+#linkb{
+    text-decoration: none;
+    color: black;
+}

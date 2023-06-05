@@ -1,0 +1,311 @@
+{% extends 'base.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HistoryApp</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    {% block content %}
+    <link href="{% static '/historyapplications.css' %}" rel="stylesheet" />
+    <link href="{% static 'newscholarship.css' %}" rel="stylesheet" />
+
+    <div class="row mb-3 flex-sm-row" id="contTitulo">
+      <div class="col-md-8">
+        <br />
+        <h1 id="titulo" class="mt-2" style="color: white">Gestión de usuarios</h1>
+        <hr id="line" class="w-80" />
+      </div>
+      <div class="col-md-4">
+        <img
+          src="../../media/icons/HigherEducation.png"
+          alt="No Encontrada"
+          class="img-fluid d-none d-md-block"
+          id="graduatedImg"
+        />
+      </div>
+    </div>
+    <!--  Container -->
+<!-- user_list.html -->
+
+
+<div class="container-fluid">
+  <style>
+     #rechazarBTN {
+      color: #F29F05;
+      background-color: white;
+      border: 2px solid #F29F05;
+      transition: background-color 0.3s, color 0.3s;
+      margin-top: -1.5%;
+      margin-right: 5%;
+      margin-left: 5%;
+      text-decoration: none;
+  }
+  
+  #rechazarBTN:hover {
+      background-color: #F29F05;
+      color: white;
+      text-decoration: none;
+  }
+  
+  #verificarBTN {
+      color: #A4D955;
+      background-color: white;
+      border: 2px solid #A4D955;
+      transition: background-color 0.3s, color 0.3s;
+      margin-top: -1.5%;
+      text-decoration: none;
+      margin-left: 5%;
+      margin-right: 5%;
+  }
+  
+  #verificarBTN:hover {
+      background-color: #A4D955;
+      color: white;
+      text-decoration: none;
+  }
+
+  
+
+    .itemnumber:hover {
+      color: white;
+      background-color: #A4D955;
+      font-weight: bolder;
+    }
+
+    .itemnumberp:hover {
+      color: white;
+      background-color: #A4D955;
+      font-weight: 600;
+    }
+
+    .itemall {
+      background-color: white;
+      border: 1px solid #F29F05;
+      border-radius: 1rem;
+      margin-right: 10%;
+    }
+
+    .itemall2 {
+      background-color: white;
+      border: 1px solid #a4d955;
+      color: #fff;
+      border-radius: 1rem;
+      margin-right: 10%;
+    }
+
+
+    .itemn {
+      color: #F29F05;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .itemn:hover {
+      color: black;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .itemn2 {
+      color: #a4d955;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .itemn2:hover {
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .itemall:hover {
+      background-color: white;
+      border: 1px solid #a4d955;
+      border-radius: 1rem;
+    }
+
+    .itemall2:hover {
+      background-color: #a4d955;
+      border: 1px solid #a4d955;
+      border-radius: 1rem;
+    }
+    
+  .search-icon {
+      background-color: #A4D955;
+      border: none;
+      color: white;
+      border-top-right-radius: 30%;
+      border-bottom-right-radius: 30%;
+      cursor: pointer;
+      height: 50px;
+  }
+  
+  .search-icon i {
+      padding: 5px;
+  }
+
+  .custom-input {
+      height: 50px; /* Ajusta la altura según tus necesidades */
+      font-family: 'Open Sans', sans-serif;
+      border-radius: 1rem;
+  }
+
+  .button-link {
+      text-decoration: none;
+     
+  }
+
+  .button-link:hover {
+      text-decoration: none;
+      
+  }
+  </style>
+
+  <!-- Beneficiaries -->
+  <div class="row " style="background-color: white; margin-top:1rem; border-radius: 3%; margin-left: 0.2%;">
+    <div class="col-lg-5 d-flex">
+      <h4 style="color: #F29F05; font-weight: bolder; margin-top: 2rem; margin-left: 5%;">Consultar usuarios</h4>
+    </div>
+   
+    <div class="col-lg-7 align-self-end d-flex justify-content-end" >
+      <button class="btn itemall2" type="button" aria-expanded="false">
+        <a class="text-center itemn2 " href="/../users/signupAdm"> Añadir Administrador </a>
+      </button>
+      <button class="btn itemall" type="button" aria-expanded="false">
+        <a class="text-center itemn " href="{% url 'users:showUsers' %}"> Ver todos </a>
+      </button>
+
+    </div>
+    <hr style="border: 2px solid #ECECEC;
+    transform: matrix(1, 0.01, 0, 1, 0, 0); width: 90%; margin-left: 5%;">
+    <form class="d-flex col=lg-12 mt-2" action="{% url 'users:showUsers' %}" style="width: 96%; margin-left: 2.5%;" method="get">
+      {% csrf_token %}
+      <div class="input-group">
+    <input type="text" name="inputsearch"  class="form-control custom-input" placeholder="Buscar usuario" aria-label="Buscar"
+      style="font-weight: bolder;" >
+    <div class="input-group-append">
+      <button style="
+      border: none; background-color: transparent;" type="submit">
+      <span class="input-group-text search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+    </button>
+    </div>
+  </div>
+    </form>
+
+    <form class="mt-3" method="GET" action="" style="width: 50%; margin-left: 2.5%;">
+      <div class="input-group mb-3">
+      <label for="role-filter" class="input-group-text" style="background-color: #fff;">Role:</label>
+      <select id="role-filter"  name="role" class="form-select">
+          <option value="">Todos</option>
+          <option value="1">Beneficiario</option>
+          <option value="2">Donante natural</option>
+          <option value="3">Donante jurídico</option>
+          <option value="4">Institución</option>
+          <option value="5">Admin</option>
+      </select>
+      <button type="submit" class="btn btn-primary" style="background-color: #A4D955; border: transparent;">Filtrar</button>
+      </div>
+  </form>
+    <div class="table-responsive" style="width: 95%; margin-left: 2.5%;" >
+      <table class="table" style="border: transparent;">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th style="width: 2rem"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if users %}
+          {% for user in users %}
+          <tr class="mt-4 align-middle" style="height: 7rem; box-shadow:0px 1px 4px rgba(0, 0, 0, 0.25); border-radius: 10px;" >
+            <td class="align-middle" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;">
+              {% if user.profilePicture != "" %}
+              <img src="/media/{{ user.profilePicture }}" class="img-fluid" alt="noimage"
+                style="max-width: 3rem; max-height: 3rem; border-radius: 10px; margin-right: 0.5rem;">
+              {% else %}
+              <img src="/media/users/profile_default.png" class="img-fluid" alt="noimage"
+                style="max-width: 3rem; max-height: 3rem; border-radius: 10px; margin-right: 0.5rem;">
+              {% endif %}
+            </td>
+            <td>
+              
+                <div class="col-12" style="font-weight: bolder; font-size: larger;">{{  user.name|capfirst  }}</div>
+                <div class="col-12">Role: {% if user.role == 1 %}Beneficiario {% elif user.role == 2 %}Donante natural{% elif user.role == 3 %}Donante jurídico{% elif user.role == 4 %}Institución aliada{% elif user.role == 5 %}Administrador{% endif %}</div>
+                <div class="col-12">{{ user.email }}</div>
+              
+            </td>
+            <td>
+              
+                <div class="col-12">&nbsp;</div>
+                <div class="col-12 align-middle">{% if user.idType == 1 %}TI {% elif user.idType == 2 %}CC{% elif user.idType == 3 %}CE{% elif user.idType == 4 %}NIT{% endif %}:</div>
+                <div class="col-12"> {{ user.numID }}</div>
+              
+            </td>
+
+            <td>
+              
+                <div class="col-12">&nbsp;</div>
+                </div>
+                <div class="col-12">ID: {{ user.id }}</div>
+                <div class="col-12"> {% if user.is_active %} Usuario activo {% else %} Usuario inactivo {% endif %}</div>
+            
+            </td>
+            <td
+              style="background-color: rgba(242, 159, 5, 0.7); border-top-right-radius: 10px; border-bottom-right-radius: 10px;"
+              class="align-middle">
+              <div class="d-flex align-items-center justify-content-center">
+                <button type="submit" class="btn btn-link p-0" style=" border: none;" name="viewBeneficiaryDetails"
+                  data-scholarship-id="{{ x.id_user.name }}">
+                  <a href="{% url 'users:showdetailsusers' id=user.id %}">
+                  <img src="/media/images/Forward.png" class="img-fluid" alt="noimage"
+                    style="max-width: 3rem; max-height: 3rem;">
+                  </a>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th></th>
+          </tr>
+          {% endfor %}
+
+          {% else %}
+
+        <div class="row justify-content-center" style="min-height: 80vh">
+            <div class="col align-self-center text-center">
+                <p style="font-weight: 600; font-size: 24px">
+                    No se encontraron resultados
+                </p>
+            </div>
+        </div>
+          {% endif %}
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+</body>
+{% endblock %}
+

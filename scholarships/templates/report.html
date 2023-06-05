@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reporte de transacción</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th{
+            color:#f29f05;
+        }
+        
+        h1 {
+            display: inline;
+            text-align: center;
+            color:#f29f05;
+
+        }
+
+        p{
+            color:#A4D955;
+           
+        }
+
+  
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Reporte de transacción exitosa</h1>
+    </div>
+
+    <h2>Detalles de la transacción</h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Monto</th>
+                    <th>Fecha de Transacción</th>
+                    <th>Donacion hecha para:</th>
+                    <!-- Agrega más encabezados de tabla según sea necesario -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ Transaction.id }}</td>
+                    <td>{{ Transaction.amount }}</td>
+                    <td>{{ Transaction.date_transaction }}</td>
+                    
+                    {% if Transaction.scolarship_donation is not None %}
+                        <td>{{ Transaction.scolarship_donation.id_user.name }}</td>
+                    {% elif Transaction.institution_donation is not None %}
+                        <td>{{ Transaction.institution_donation.name}}</td>
+                    {% else %}
+                        <td>No se encontró información adicional</td>
+                    {% endif %}
+
+                    <!-- Agrega más celdas de tabla con los detalles de la transacción según sea necesario -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Detalle del remitente</h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Tipo de Pago</th>
+                    <!-- Agrega más encabezados de tabla según sea necesario -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ Transaction.donor_user.name }}</td>
+                    <td>{{ Transaction.donor_user.email }}</td>
+                    <td>{{ Transaction.type_pay }}</td>
+                    <!-- Agrega más celdas de tabla con los detalles del remitente según sea necesario -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Detalle del destinatario </h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Información bancaria</th>
+                    
+                    <!-- Agrega más encabezados de tabla según sea necesario -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dreamsbank</td>
+                    
+                    {% if Transaction.type_pay == 'PayPal' %}
+                        <td>
+                             Paypal:<br><br>
+                            dreamsbank.kp@gmail.com<br>
+                         </td>
+                    {% elif Transaction.type_pay == 'PSE' %}
+                        <td>
+                            PSE:<br><br>
+                            Número de identificación: 1234567890 <br>
+                            Nombre completo: Dreams Bank <br>
+                            Entidad bancaria: Davivienda<br>
+                            Número de cuenta:9876543210<br>
+                            Tipo de cuenta del beneficiario: Cuenta de ahorros <br>
+
+                        </td>
+                    {% elif Transaction.type_pay == 'Cards' %}
+                    <td>
+                        Bancos:<br><br>
+                    
+                        Cuenta Davivienda:<br>
+                        Nombre completo: Dreams Bank<br>
+                        Tipo de documento: NIT (Número de Identificación Tributaria)<br>
+                        Número de documento: 1234567890<br>
+                        Entidad bancaria: Banco ABC<br>
+                        Número de cuenta: 9876543210<br>
+                        Tipo de cuenta: Ahorros<br><br>
+                    
+                        Scotiabank:<br>
+                        Nombre completo: Dreams Bank<br>
+                        Tipo de documento: NIT (Número de Identificación Tributaria)<br>
+                        Número de documento: 1234567890<br>
+                        Tipo de cuenta: Ahorros<br>
+                        Número de cuenta: 9876583219<br><br>
+                    
+                        Bancolombia:<br>
+                        Nombre completo: Dreams Bank<br>
+                        Tipo de documento: NIT (Número de Identificación Tributaria)<br>
+                        Número de documento: 1234567890<br>
+                        Tipo de cuenta: Ahorros<br>
+                        Número de cuenta: 5678901234<br>
+                        Código de la sucursal: 002
+                    </td>
+                    
+                    
+                    {% else %}
+                        <td>No se encontró</td>
+                        <p>{{ Transaction.type_pay }}</p> <!-- Agrega este código de depuración -->
+                    {% endif %} 
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>Generado por DreamsBank</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

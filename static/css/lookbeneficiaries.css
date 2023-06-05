@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Roboto+Condensed&display=swap');
+
+.search-icon {
+    background-color: #A4D955;
+    border: none;
+    color: white;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    cursor: pointer;
+    height: 50px;
+  }
+  
+  .search-icon i {
+    padding: 5px;
+  }
+
+  .custom-input {
+    height: 50px; /* Ajusta la altura según tus necesidades */
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 1rem;
+  }

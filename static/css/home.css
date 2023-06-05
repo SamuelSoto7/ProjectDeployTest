@@ -1,0 +1,70 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Roboto+Condensed&display=swap');
+
+:root{
+    --bs-body-font-family:'DM Sans', sans-serif;
+}
+
+
+
+
+#col1{
+    padding-top: 4rem;
+}
+
+#text0{
+    margin-top: 1rem;
+}
+#rowb{
+    padding-bottom: 1rem;
+}
+
+.p1{
+    color: #A1B97E;
+    font-family:'DM Sans';
+    font-size: 3rem;
+    font-weight: bold;
+}
+.p2{
+    color: #558018;
+    font-family:'DM Sans';
+    font-size: 3rem;
+    font-weight: bold;
+}
+.p3{
+    color: #A4D955;
+    font-family:'DM Sans';
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+#text1{
+    font-size: 1rem;
+}
+
+.img-thumbnail{
+    border: none;
+    padding: 0;
+}
+
+
+
+.btn{
+    background-color: #f8c059;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family:'DM Sans';
+    font-weight: lighter;
+    font-size: 1.1rem;
+    margin-right: 2rem;
+}
+
+#donatebtn{
+    margin-left: 1rem;
+}
+
+.btn:hover{
+    background-color: #A4D955;
+}

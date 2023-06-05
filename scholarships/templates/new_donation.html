@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}Nueva Donación{% endblock %}
+
+{% block header %}
+<link href="{% static '/newdonation.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4" id="title_section">
+      <div class="col-lg-8 text-center" >
+        <h1>Nueva Donación</h1>
+        <hr id="line" class="w-80">
+      </div>
+      <div class="col-lg-4 text-right">
+        <img src="../../media/icons/HigherEducation.png" alt="Imagen" class="img-fluid d-none d-md-block"
+            id="graduatedImg" />
+      </div>
+    </div>
+    <div class="row mb-4" id="informationSelect_section">
+      <div class="col mb-4">
+            <h2>Realizar donación</h2>
+            <hr id="line_section2" class="w-80">
+
+            <p>Selecciona el tipo de donación que deseas hacer.</p>
+        
+            <div class="row">
+              <div class="col text-center">
+                  <a href="{% url 'scholarships:look_beneficiaries' %}" class="btn btn-primary custom-button">Donación cerrada</a>
+              </div>
+              <div class="col text-center">
+                  <a href="{% url 'scholarships:look_institutions' %}" class="btn btn-secondary custom-button">Donación abierta</a>
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="row mb-4 justify-content-between" id="informationSection_3">
+        <!--Info Donación Cerrada-->
+        <div class="col-lg-5 md-12" id="donCerrada">
+          <h3>Donación cerrada</h3>
+          <p>Para facilitarte la elección te recordamos lo siguiente:</p>
+          <div class="row">
+            <div class="col-md-2 text-center">
+              <img src="../../media/images/numberOne.png" alt="Imagen" class="img-fluid">
+            </div>
+            <div class="col-md-10 text-left">
+              <p>Cuando haces una donación cerrada le ayudas a cumplir el sueño de ser un profesional a un estudiante.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2 text-center">
+              <img src="../../media/images/numberTwo.png" alt="Imagen" class="img-fluid">
+            </div>
+            <div class="col-md-10 text-left">
+              <p>En la donación cerrada podrás elegir al aspirante con el que te sientas más afín</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2 text-center">
+              <img src="../../media/images/numberThree.png" alt="Imagen" class="img-fluid">
+            </div>
+            <div class="col-md-10 text-left">
+              <p>Una vez escojas al aspirante que desees, podrás escoger el tipo de aporte que le quieres ofrecer</p>
+            </div>
+          </div>
+        </div>
+      
+      <!--Info Donación Abierta-->
+        <div class="col-lg-5 md-12" id="donAbierta">
+          <h3>Donación abierta</h3>
+          <p>Para facilitarte la elección te recordamos lo siguiente:</p>
+          <div class="row">
+            <div class="col-md-2 text-center">
+              <img src="../../media/images/numberOne.png" alt="Número 1" class="img-fluid">
+            </div>
+            <div class="col-md-10 text-left">
+              <p>Cuando haces una donación abierta le ayudas a instituciones, departamentos o programas educativos para invertir en innovación de sus programas y/o ayudar a sus estiantes economicamente.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2 text-center">
+              <img src="../../media/images/numberTwo.png" alt="Número 2" class="img-fluid">
+            </div>
+            <div class="col-md-10 text-left">
+              <p>En la donación abierta podrás escoger la institución o programa al que quieras donar. Al igual que en la donación cerrada, podrás escoger el tipo de aporte que quieras ofrecer.</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

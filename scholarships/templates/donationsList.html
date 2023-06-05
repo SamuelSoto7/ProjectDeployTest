@@ -1,0 +1,272 @@
+{% extends 'base.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultar Instituciones</title>
+  {% block content %}
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="{% static '/lookbeneficiaries.css' %}" rel="stylesheet" />
+  <link href="{% static '/historyapplications.css' %}" rel="stylesheet"/>
+  <link href="{% static 'newscholarship.css' %}" rel="stylesheet"/>
+</head>
+
+<body>
+{% if user.role == 5 %}
+  <div class="row mb-3 flex-sm-row" id="contTitulo">
+    <div class="col-md-8">
+      <br />
+      <h1 id="titulo" class="mt-2" style="color: white">Gestión de donaciones</h1>
+      <hr id="line" class="w-80" />
+     
+    </div>
+    <div class="col-md-4">
+      <img
+        src="../../media/icons/HigherEducation.png"
+        alt="No Encontrada"
+        class="img-fluid d-none d-md-block"
+        id="graduatedImg"
+      />
+    </div>
+  </div>
+  {% endif %}
+
+
+
+  <div class="container-fluid">
+
+ 
+
+    <style>
+       #rechazarBTN {
+        color: #F29F05;
+        background-color: white;
+        border: 2px solid #F29F05;
+        transition: background-color 0.3s, color 0.3s;
+        margin-top: -1.5%;
+        margin-right: 5%;
+        margin-left: 5%;
+        text-decoration: none;
+    }
+    
+    #rechazarBTN:hover {
+        background-color: #F29F05;
+        color: white;
+        text-decoration: none;
+    }
+    
+    #verificarBTN {
+        color: #A4D955;
+        background-color: white;
+        border: 2px solid #A4D955;
+        transition: background-color 0.3s, color 0.3s;
+        margin-top: -1.5%;
+        text-decoration: none;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    
+    #verificarBTN:hover {
+        background-color: #A4D955;
+        color: white;
+        text-decoration: none;
+    }
+
+    
+
+      .itemnumber:hover {
+        color: white;
+        background-color: #A4D955;
+        font-weight: bolder;
+      }
+
+      .itemnumberp:hover {
+        color: white;
+        background-color: #A4D955;
+        font-weight: 600;
+      }
+
+      .itemall {
+        background-color: white;
+        border: 1px solid #F29F05;
+        border-radius: 1rem;
+        margin-right: 10%;
+      }
+
+      .itemn {
+        color: #F29F05;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .itemn:hover {
+        color: black;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .itemall:hover {
+        background-color: white;
+        border: 1px solid #a4d955;
+        border-radius: 1rem;
+      }
+      
+    .search-icon {
+        background-color: #A4D955;
+        border: none;
+        color: white;
+        border-top-right-radius: 30%;
+        border-bottom-right-radius: 30%;
+        cursor: pointer;
+        height: 50px;
+    }
+    
+    .search-icon i {
+        padding: 5px;
+    }
+
+    .custom-input {
+        height: 50px; /* Ajusta la altura según tus necesidades */
+        font-family: 'Open Sans', sans-serif;
+        border-radius: 1rem;
+    }
+
+    .button-link {
+        text-decoration: none;
+       
+    }
+
+    .button-link:hover {
+        text-decoration: none;
+        
+    }
+    </style>
+
+    <!-- Beneficiaries -->
+    <div class="row " style="background-color: white; margin-top:1rem; border-radius: 3%; margin-left: 0.2%;">
+      <div class="col-lg-8 d-flex">
+        <h4 style="color: #F29F05; font-weight: bolder; margin-top: 2rem; margin-left: 5%;">Donaciones realizadas</h4>
+      </div>
+     
+      <div class="col-lg-4 align-self-end d-flex justify-content-end" >
+    
+        <button class="btn itemall" type="button" aria-expanded="false">
+          <a class="text-center itemn " href="{% url 'scholarships:donationslist' %}"> Ver todas </a>
+        </button>
+    
+      </div>
+      <hr style="border: 2px solid #ECECEC;
+      transform: matrix(1, 0.01, 0, 1, 0, 0); width: 90%; margin-left: 5%;">
+
+
+<!-- Filtros -->
+<form action="{% url 'scholarships:donationslist' %}" method="GET" class="form-inline" style="margin-left: 2.5%; width: 95%;">
+  <div class="form-group">
+    <input type="number" id="min_amount" name="min_amount" class="form-control form-control-sm mr-2" placeholder="Cantidad Mínima">
+  </div>
+  <div class="form-group">
+    <input type="number" id="max_amount" name="max_amount" class="form-control form-control-sm mr-2" placeholder="Cantidad Máxima">
+  </div>
+  <button type="submit" class="btn btn-primary btn-sm" style="background-color: #A4D955; border: #A4D955; margin-top: 1rem; margin-left: 44.5%;">Filtrar</button>
+</form>
+
+
+    
+
+      <div class="table-responsive" style="width: 95%; margin-left: 2.5%;" >
+        <table class="table" style="border: transparent;">
+          <thead>
+            <tr>
+              <th class="text-center">Beneficiario</th>
+                    <th class="text-center">Donador</th>
+                    <th class="text-center">Donación</th>
+
+              <th style="width: 2rem"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if transactions %}
+            {% for x in transactions %}
+            <tr class="mt-4 align-middle text-center" style="height: 7rem; box-shadow:0px 1px 4px rgba(0, 0, 0, 0.25); border-radius: 10px;" >
+              <td class="align-middle" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;">
+                {% if x.scolarship_donation.id_user.name and  x.scolarship_donation.id_user.profilePicture != "" %}
+                <img src="/media/{{ x.scolarship_donation.id_user.profilePicture }}" class="img-fluid" alt="noimage"
+                  style="max-width: 3rem; max-height: 3rem; border-radius: 10px; margin-right: 0.5rem;">
+                {% elif x.institution_donation.name and x.institution_donation.profilePicture  %}
+                <img src="/media/{{ x.institution_donation.profilePicture }}" class="img-fluid" alt="noimage"
+                  style="max-width: 3rem; max-height: 3rem; border-radius: 10px; margin-right: 0.5rem;">
+                {% else %}
+                <img src="/media/users/profile_default.png" class="img-fluid" alt="noimage"
+                  style="max-width: 3rem; max-height: 3rem; border-radius: 10px; margin-right: 0.5rem;">
+                {% endif %}
+                <div class="col-12 text-center" style="font-weight: bolder; font-size: larger;">{{ x.name|capfirst }}
+                </div>
+                
+                {% if x.scolarship_donation.id_user.name %}
+                
+                <div class="col-12 text-center" >{{ x.scolarship_donation.id_user.name }}</div>
+                <div class="col-12 text-center"> {% if x.scolarship_donation.id_user.idType == 1 %}TI {% elif x.scolarship_donation.id_user.idType == 2 %}CC{% elif x.scolarship_donation.id_user.idType == 3 %}CE{% elif x.scolarship_donation.id_user.idType == 4 %}NIT{% endif %}: {{ x.scolarship_donation.id_user.numID }}</div>
+                
+                {% else %}
+                <div class="col-12 text-center" >{{ x.institution_donation.name }}</div>
+                {% endif %}
+              </td>
+              <td>
+                {% if x.donor_user.profilePicture != "" %}
+                <img src="/media/{{ x.donor_user.profilePicture }}" class="img-fluid" alt="noimage"
+                  style="max-width: 3rem; max-height: 3rem; border-radius: 10px; margin-right: 0.5rem;">
+                {% else %}
+                <img src="/media/users/profile_default.png" class="img-fluid" alt="noimage"
+                  style="max-width: 3rem; max-height: 3rem; border-radius: 10px; margin-right: 0.5rem;">
+                  {% endif %}
+
+                  <div class="col-12 text-center">{{ x.donor_user.name }}</div>
+                  <div class="col-12 text-center"> {% if x.donor_user.idType == 1 %}TI {% elif x.donor_user.idType == 2 %}CC{% elif x.donor_user.idType == 3 %}CE{% elif x.donor_user.idType == 4 %}NIT{% endif %}:{{ x.donor_user.numID }} </div>
+                </div>
+              </td>
+    
+              <td>
+                <div class="col-12 text-center">{{ x.date_transaction|date:"Y-m-d" }}</div>
+                  <div class="col-12 text-center" >$ {{ x.amount }}</div>
+                  
+                  <div class="col-12 text-center">{% if x.type_pay == "PSE" %} PSE
+                    {% elif x.type_pay == "Cards" %} Tarjeta
+                    {% elif x.type_pay == "PayPal" %} Paypal
+                    {% else %} {{ x.type_pay }}
+                    {% endif %}</div>
+               
+              </td>
+            </tr>
+            <tr style="margin-top: 1rem;">
+          </tr>
+            {% endfor %}
+    
+            {% else %}
+    
+          <div class="row justify-content-center" style="min-height: 80vh">
+              <div class="col align-self-center text-center">
+                  <p style="font-weight: 600; font-size: 24px">
+                      No se encontraron resultados
+                  </p>
+              </div>
+          </div>
+            {% endif %}
+    
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  {% endblock %}
+</body>
+
+</html>

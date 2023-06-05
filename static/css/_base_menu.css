@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans&family=Roboto+Condensed&display=swap');
+
+body{
+    background-color: #F0F7FF;
+}
+
+
+
+/*left bar style*/
+#leftspace, #leftbar, #navbarSupportedContent {
+    background-color: white;
+    opacity: 100%;
+
+}
+#leftbar{
+    padding-right: 2%;
+}
+
+#imgLogo {
+    display: block;
+    margin: auto;
+    width: 50%;
+    margin-bottom: 1.25rem;
+}
+
+
+
+.my-custom-class {
+    
+    font-size: 20px;
+    color: #8a8a8a;
+    font-family: 'Open Sans';
+    font-style: normal;
+    
+  }
+  
+.navbar-nav.flex-column a {
+    color: grey;
+  }
+
+.navbar-nav.flex-column .nav-link a:hover  {
+    color: #A4D955;
+}
+
+.nav-link a{
+    color:#8A8A8A
+}
+
+.navbar-toggler.my-toggler {
+    border: 2px solid #558018;
+    border-radius: 10px;
+    background-color: white;
+    color:#558018;
+    font-weight: bold;
+  }
+
+
+.nav-link{
+    color:#8A8A8A;
+}
+
+
+
+#profiles{
+    margin-left: 4%;
+    
+    background: #FFDA6D;
+    border-radius: 0.75rem 0.75rem 0.75rem 0.75rem;
+}
+
+#profile_picture{
+    
+    height: fit-content;
+    margin-left: 7%;
+    margin-top: 3%;
+    border-radius: 10px 10px 10px 10px;
+    background: #FFFFFF
+}
+
+#profile_picture {
+    height: fit-content;
+    margin-left: 4%;
+    margin-top: 3%;
+    border-radius: 10px;
+    background: #FFFFFF;
+  }
+  
+
+#profile_names{
+
+   font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 37.5rem;
+    font-size: 0.938rem;
+    font-style: normal;
+    color: #333333;
+
+    margin-top: 5%;
+    
+}
+
+  .username {
+    font-size: 1.5rem;
+  }
+
+#perfil_dropdown{
+    margin-top: 4%;
+}
+
+
+#notif {
+    height: calc(100vh - 200px); /* Establece la altura para ocupar el espacio restante de la ventana */
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si hay demasiado contenido */
+    background-color:black;
+
+  }
+
+  #scrollBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none; /* Oculta el botón de desplazamiento inicialmente */
+    z-index: 999;
+  }
+#notif h4{
+    font-family: 'Open Sans';
+    font-style: bold;
+    font-size: 1.25rem;
+    color: #333333;
+    margin-top: 9%;
+}
+
+
+#see_all a{
+    font-family: 'Open Sans';
+    font-style: bold;
+    font-size: 0.813rem;
+    color: #558018;
+    margin-left: 30%;
+}
+
+#leftspace{
+    background-color: #fff;
+    opacity: 100%;
+}
+
+
+#ok,#x2,#new{
+    background-color: #F0F7FF;
+}
+
+#x2 {
+   
+    margin-right:10px;
+}
+
+.nav-link a:hover{
+
+}
+
+#fofo{
+    background-color: #fff;
+}
+
+#profile{
+    background-color: #fff;
+}
+
+#notif {
+    background: rgba(255, 218, 109, 0.46);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.list-group-item {
+    margin-bottom: 10px;
+    
+}
+
+.list-group-item.font-weight-bold {
+    background-color: rgba(255, 255, 255, 0.5);
+    
+
+}
+
+
+

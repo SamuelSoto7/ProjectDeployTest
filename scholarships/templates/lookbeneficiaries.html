@@ -1,0 +1,264 @@
+{% extends 'base.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultar Beneficiarios</title>
+  {% block content %}
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link href="{% static '/lookbeneficiaries.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+
+
+
+  <div class="container-fluid">
+    <form class="d-flex col=lg-12" action="{% url 'scholarships:searchBen' %}" method="post">
+        {% csrf_token %}
+      <div class="input-group">
+      <input type="text" name="inputsearch"  class="form-control custom-input" placeholder="Buscar beneficiario" aria-label="Buscar"
+      style="font-weight: bolder;" >
+    
+      <div class="input-group-append">
+      <button style="
+      border: none; background-color: transparent;" type="submit">
+      <span class="input-group-text search-icon">
+        <i class="fas fa-search"></i>
+      </span>
+      </button>
+      </div>
+      </div>
+    </form>
+
+
+    <!-- Filters -->
+    <div class="row d-flex justify-content-center">
+      <div class="d-flex justify-content-center mt-3" style=" width:auto;">
+        <div class="dropdown text-center ">
+          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+            style="background-color: white; border: 0.5px solid #A4D955;">
+            Valor Sem.
+          </button>
+          <ul class="dropdown-menu ">
+            {% for interval in intervals %}
+            <li><a class="dropdown-item text-center itemnumberp"
+                href="{% url 'scholarships:filtervalue' interval.0 interval.1 %}">$ {{ interval.0 }} - $ {{ interval.1}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% if user.role != 4 %}
+      <div class="d-flex justify-content-center mt-3" style="width: auto;">
+
+        <div class="dropdown text-center">
+          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+            style="background-color: white; border: 0.5px solid #A4D955;">
+            Institucion
+          </button>
+          <ul class="dropdown-menu">
+            {% for institution in institutions %}
+            <li><a class="dropdown-item itemnumberp" href="{% url 'scholarships:filterinstitution' institution.id %}">{{institution.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+      <div class="d-flex justify-content-center mt-3" style=" width: auto;">
+        <div class="dropdown text-center">
+          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+            style="background-color: white; border: 0.5px solid #A4D955;">
+            Programa
+          </button>
+          <ul class="dropdown-menu ">
+            <li><a class="dropdown-item itemnumberp"
+                href="{% url 'scholarships:filterprogram' 'ingenieria-informatica' %}">Ingeniería Informática</a></li>
+            <li><a class="dropdown-item itemnumberp"
+                href="{% url 'scholarships:filterprogram' 'administracion-empresas' %}">Administración de Empresas</a>
+            </li>
+            <li><a class="dropdown-item itemnumberp"
+                href="{% url 'scholarships:filterprogram' 'medicina' %}">Medicina</a></li>
+            <li><a class="dropdown-item itemnumberp"
+                href="{% url 'scholarships:filterprogram' 'ingenieria-civil' %}">Ingeniería Civil</a></li>
+            <li><a class="dropdown-item itemnumberp"
+                href="{% url 'scholarships:filterprogram' 'psicologia' %}">Psicología</a></li>
+            <li><a class="dropdown-item itemnumberp" href="{% url 'scholarships:filterprogram' 'derecho' %}">Derecho</a>
+            </li>
+            <li><a class="dropdown-item itemnumberp"
+                href="{% url 'scholarships:filterprogram' 'ingenieria-industrial' %}">Ingeniería Industrial</a></li>
+            <li><a class="dropdown-item itemnumberp"
+                href="{% url 'scholarships:filterprogram' 'comunicacion-social' %}">Comunicación Social</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class=" d-flex justify-content-center mt-3" style=" width: 9.5rem;">
+        <div class="dropdown w-100 text-center">
+          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+            style="background-color: white; border: 0.5px solid #A4D955;">
+            Semestre
+          </button>
+          <ul class="dropdown-menu w-100">
+            {% for i in semesters %}
+            <li><a class="dropdown-item text-center itemnumber " href="{% url 'scholarships:filtersemester' i %}"> {{ i }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <style>
+      .itemnumber:hover {
+        color: white;
+        background-color: #A4D955;
+        font-weight: bolder;
+      }
+
+      .itemnumberp:hover {
+        color: white;
+        background-color: #A4D955;
+        font-weight: 600;
+      }
+
+      .itemall {
+        background-color: white;
+        border: 1px solid #F29F05;
+        border-radius: 1rem;
+        margin-right: 10%;
+      }
+
+      .itemn {
+        color: #F29F05;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .itemn:hover {
+        color: black;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .itemall:hover {
+        background-color: white;
+        border: 1px solid #a4d955;
+        border-radius: 1rem;
+      }
+      .search-icon {
+        background-color: #A4D955;
+        border: none;
+        color: white;
+        border-top-right-radius: 30%;
+        border-bottom-right-radius: 30%;
+        cursor: pointer;
+        height: 50px;
+    }
+    
+    .search-icon i {
+        padding: 5px;
+    }
+
+    .custom-input {
+        height: 50px; /* Ajusta la altura según tus necesidades */
+        font-family: 'Open Sans', sans-serif;
+        border-radius: 1rem;
+    }
+
+    .row-spacing {
+    margin-bottom: 1rem; /* Puedes ajustar el valor para obtener el espaciado deseado */
+  }
+
+    </style>
+
+    <!-- Beneficiaries -->
+    <div class="row " style="background-color: white;margin-top:1rem; border-radius: 3%; margin-left: 0.2%;">
+      <div class="col-lg-8 d-flex">
+        <h4 style="color: #F29F05; font-weight: bolder; margin-top: 2rem; margin-left: 5%;">Consultar Beneficiarios</h4>
+      </div>
+      <div class="col-lg-4 align-self-end d-flex justify-content-end">
+
+        <button class="btn itemall" type="button" aria-expanded="false">
+          <a class="text-center itemn " href="{% url 'scholarships:look_beneficiaries' %}"> Ver todos </a>
+        </button>
+
+      </div>
+      <hr style="border: 2px solid #ECECEC;
+      transform: matrix(1, 0.01, 0, 1, 0, 0); width: 90%; margin-left: 5%;">
+      <div class="table-responsive" style="width: 95%; margin-left: 2.5%;" >
+        <table class="table" style="border: transparent;">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th style="width: 2rem"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if scholarships %}
+            {% for x in scholarships %}
+            <tr class="row-spacing align-middle"style="height: 7rem; box-shadow:0px 1px 4px rgba(0, 0, 0, 0.25); border-radius: 10px;" >
+              <td class="align-middle" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;">
+                {% if x.id_user.profilePicture != "" %}
+                <img src="/media/{{ x.id_user.profilePicture }}" class="img-fluid" alt="noimage"
+                  style="max-width: 3rem; max-height: 3rem; border-radius: 10px; margin-right: 0.5rem;">
+                {% else %}
+                <img src="/media/users/profile_default.png" class="img-fluid" alt="noimage"
+                  style="max-width: 3rem; max-height: 3rem; border-radius: 10px; margin-right: 0.5rem;">
+                {% endif %}
+              </td>
+              <td>
+                <div class="row">
+                  <div class="col-12" style="font-weight: bolder; font-size: larger;">{{ x.id_user.name|capfirst }}
+                  </div>
+                  <div class="col-12">{{ x.institution.name }}</div>
+                  <div class="col-12">{{ x.institution.city }}</div>
+                </div>
+              </td>
+              <td>
+                <div class="row ">
+                  <div class="col-12" style="font-weight: 700;">{{ x.period_current }}º</div>
+                  <div class="col-12">{{ x.program_adm }}</div>
+                </div>
+              </td>
+              <td>
+                <div class="row my-auto">
+                  <div class="col-12 text-center">Valor semestral</div>
+                  <div class="col-12 text-center">$ {{ x.value_period }}</div>
+                </div>
+              </td>
+              <td
+                style="background-color: rgba(242, 159, 5, 0.7); border-top-right-radius: 10px; border-bottom-right-radius: 10px;"
+                class="align-middle">
+                <div class="d-flex align-items-center justify-content-center">
+                  <button type="submit" class="btn btn-link p-0" style=" border: none;" name="viewBeneficiaryDetails"
+                    data-scholarship-id="{{ x.id_user.name }}">
+                    <a href="{% url 'scholarships:showdetailsbeneficiary' id=x.id %}">
+                    <img src="/media/images/Forward.png" class="img-fluid" alt="noimage"
+                      style="max-width: 3rem; max-height: 3rem;">
+                    </a>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  {% endblock %}
+</body>
+
+</html>

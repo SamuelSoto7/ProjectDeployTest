@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+
+<link href="{% static 'signup.css' %}" rel="stylesheet">
+<link href="{% static 'base.css' %}" rel="stylesheet">
+<link href="{% static '/historyapplications.css' %}" rel="stylesheet" />
+<link href="{% static 'newscholarship.css' %}" rel="stylesheet" />
+<style>
+    #registersignup {
+        background-color: #F29F05;
+        color: white;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        margin-left: 42%;
+        border: none;
+    }
+
+    #registersignup:hover {
+        background-color: #A4D955;
+        color: white;
+    }
+
+</style>
+
+<div class="row mb-3 flex-sm-row" id="contTitulo">
+    <div class="col-md-8">
+        <br />
+        <h1 id="titulo" class="mt-2" style="color: white">Registro de administrador</h1>
+        <hr id="line" class="w-80" />
+    </div>
+    <div class="col-md-4">
+        <img
+            src="../../media/icons/HigherEducation.png"
+            alt="No Encontrada"
+            class="img-fluid d-none d-md-block"
+            id="graduatedImg"
+        />
+    </div>
+</div>
+
+
+<div class="container1-lg">
+    <div class="row g-3 mt-3">
+        <div class="col-md-11">
+            <div class="row">
+                <div class="col-12" style="margin-left: 5%;">
+                </div>
+                <div class="col-6" style="margin-left: 5%;">
+                    <p id="mandatoryObligatory">
+                        <img src="../../media/icons/Asterisk.png" alt="Asterisk image" width="10" height="10"
+                            id="AsteriskImg" />
+                        Obligatorio
+                    </p>
+                </div>
+            </div>
+            <form method="post" enctype="multipart/form-data" style="margin-left: 5%;">
+                {% csrf_token %}
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.email.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                        {% if form.name.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.name.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        {{ form.password1.label_tag }}
+                        {{ form.password1 }}
+                        {% if form.password1.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.password1.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.password2.label_tag }}
+                        {{ form.password2 }}
+                        {% if form.password2.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.password2.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        {{ form.idType.label_tag }}
+                        {{ form.idType }}
+                        {% if form.idType.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.idType.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.numID.label_tag }}
+                        {{ form.numID }}
+                        {% if form.numID.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.numID.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        {{ form.profilePicture.label_tag }}
+                        {{ form.profilePicture }}
+                        {% if form.profilePicture.errors %}
+                        <ul class="errorlist">
+                            {% for error in form.profilePicture.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row mt-3">
+
+                </div>
+                <button type="submit" class="btn btn-outline-primary" id="registersignup">Registrarse</button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

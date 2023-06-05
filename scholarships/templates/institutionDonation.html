@@ -1,0 +1,203 @@
+{% extends 'base.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Descripción de institucion para aportar</title>
+    <link href="{% static '/beneficiaryToDonate.css' %}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+
+    {% block header %}
+    <link href="{% static '/beneficiaryToDonate.css' %}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    <div class="container-fluid">
+    <div class="row mb-3 flex-sm-row" id="contTitulo">
+        <div class="col-md-9">
+            <br />
+            <h3 id="titulo" class="mt-2">Detalle de Institucion</h3>
+            <hr id="line" class="w-80" />
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="d-flex justify-content-center">
+            <img src="../../../media/icons/fund.png" alt="No Encontrada" class="img-fluid d-none d-md-block"
+                id="graduatedImg" />
+            </div>
+        </div>
+    </div>
+
+
+    <!--- fields form-->
+    <div class="form">
+        <div class="row">
+            <div class="col-lg-5 d-flex flex-column align-items-center " >
+                <img src="/media/{{ institution.profilePicture }}" class="img-fluid" alt="noimage"
+                  style="max-width: 15rem; height: 13rem; border-radius: 10px; margin-right: 0.5rem;">
+
+
+                
+               
+            </div>
+
+            <div class="col-lg-7">
+                <div class="d-flex ">
+                    <h5 style="color: #F29F05;">Institucion: </h5>
+                    <h5 class="mx-2"> 
+                    {{ institution.name|capfirst }}
+                    </h5>
+                </div>
+                <div class="d-flex ">
+                    <h5 style="color: #F29F05;">Carreras: </h5>
+                    <h5 class="mx-2">
+                    {% for choice in institution.TYPE_CHOICES %}
+                        {% if choice.0 in institution.type_institution %}
+                         {{ choice.1 }},
+                        {% endif %}
+                        {% endfor %}
+
+                    </h5>
+                </div>
+                <div class="d-flex ">
+                    <h5 style="color: #F29F05;">Ciudad: </h5>
+                    <h5 class="mx-2"> 
+                    {{ institution.city }}
+                    </h5>
+                </div>
+                <div class="d-flex ">
+                    <h5 style="color: #F29F05;">Email: </h5>
+                    <h5 class="mx-2"> 
+                    {{ institution.email }}
+                    </h5>
+                </div>
+                <div class="d-flex ">
+                    <h5 style="color: #F29F05;">Direccion: </h5>
+                    <h5 class="mx-2"> 
+                    {{ institution.address }}
+                    </h5>
+                </div>
+                <div class="d-flex ">
+                    <h5 style="color: #F29F05;">Contacto: </h5>
+                    <h5 class="mx-2"> 
+                    {{ institution.contact }}
+                    </h5>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5 mb-4">
+
+            <form action="{% url 'scholarships:payments' institution.id %}" class="text-center" id="formdon" method="post">
+            {% csrf_token %}
+            <div class="col-lg-12 d-flex flex-column align-items-start">
+                <h5 style="text-align: left; color: #F29F05;">Aporte Libre</h5>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">$</span>
+                    </div>
+                    <input type="number" class="form-control" id="inputdon" style="direction: rtl;" placeholder="Ingrese la cantidad a donar" min="1000000" max="300000000" name="inputdonation">
+                  </div>
+                  <div id="alertContainer"></div>
+              </div>
+            <a type="button" class="btn custom btn col-md-5 mt-4 mb-5 " id="botonDonar" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                 Aportar
+            </a>
+
+        </form>
+
+
+        <!-- Modal de confirmación -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Estás seguro de que deseas aportar?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn " data-bs-dismiss="modal" style="background-color: red; font-weight: 500; color: white; ">Cancelar</button>
+          <button type="button" class="btn " style="background-color: #A4D955; font-weight: 500; color: white;" onclick="redirect()">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="institution" data-id="{{ institution.id }}" style="display: none;"></div>
+
+  <script>
+    function redirect() {
+    
+    
+    var inputValue = document.getElementById('inputdon').value;
+    var min = 1000000;
+    var max = 300000000;
+
+
+    if (inputValue >= min && inputValue <= max) {
+        var form = document.getElementById('formdon'); 
+
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'valueinput';
+        input.value = inputValue;
+        form.appendChild(input);
+
+        form.submit();
+
+        $('#confirmModal').modal('hide');
+    }
+    if (inputValue < min || inputValor > max) {
+
+        $('#confirmModal').modal('hide');
+      var message = 'El valor ingresado está fuera del rango permitido.<br> Minimo $ 1.000.000 - Maximo $300.000.000';
+      var alert = '<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">' +
+                   '<div class="modal-dialog modal-dialog-centered">' +
+                   '<div class="modal-content">' +
+                   '<div class="modal-header">' +
+                   '<h5 class="modal-title" id="alertModalLabel">:(</h5>' +
+                   '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
+                   '</div>' +
+                   '<div class="modal-body">' +
+                   '<p>' + message + '</p>' +
+                   '</div>' +
+                   '<div class="modal-footer">' +
+                   '<button type="button" class="btn " data-bs-dismiss="modal" style="background-color: red; color:white; font-weight: 600">Aceptar</button>' +
+                   '</div>' +
+                   '</div>' +
+                   '</div>' +
+                   '</div>';
+
+      document.getElementById('alertContainer').innerHTML = alert;
+
+      // Mostrar la alerta flotante
+      var alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+      alertModal.show();
+
+      return;
+    }
+    
+    
+    }
+  </script>
+        </div>
+    </div>
+    </div>
+   
+    {% endblock %}
+    <!-- jQuery y Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

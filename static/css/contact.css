@@ -1,0 +1,123 @@
+/* Estilos del formulario */
+form {
+    margin-top: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #f29f05;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1em;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+button[type="submit"] {
+    background-color: #f29f05;
+    border: none;
+    color: #fff;
+    padding: 0.75rem 1rem;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #A4D955;
+}
+
+/* Estilos de la alerta de éxito */
+.alert {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+
+/* Estilos de los iconos de Font Awesome */
+.fa {
+    color: #f29f05;
+    font-size: 1.7em;
+    margin-right: 0.5rem;
+}
+
+/*Estilos del encabezado y texto*/
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 2rem;
+    color: #f29f05;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+p, .social-label {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.5rem;
+    color: black;
+    margin-bottom: 0.5rem;
+}
+
+h2{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.8rem;
+    color: #f29f05;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.social-link{
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+.phone-link a{
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
+.address,
+.phone {
+  display: flex;
+  align-items: center;
+}
+
+.address i,
+.phone i {
+  margin-right: 5px;
+}
+
+.img-fluid{
+    border-radius: 10px;
+}

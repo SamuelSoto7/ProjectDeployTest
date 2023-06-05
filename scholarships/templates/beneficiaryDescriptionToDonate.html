@@ -1,0 +1,141 @@
+{% extends 'base.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Descripción de un beneficiario para aportar</title>
+    <link href="{% static '/beneficiaryToDonate.css' %}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+
+    {% block header %}
+    <link href="{% static '/beneficiaryToDonate.css' %}" rel="stylesheet" />
+    {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    <div class="row mb-3 flex-sm-row" id="contTitulo">
+        <div class="col-md-8">
+            <br />
+            <h1 id="titulo" class="mt-2">Descripción del estudiante</h1>
+            <hr id="line" class="w-80" />
+        </div>
+        <div class="col-md-4">
+            <img src="../../media/icons/toDonate.png" alt="No Encontrada" class="img-fluid d-none d-md-block"
+                id="graduatedImg" />
+        </div>
+    </div>
+    <div class="row" id="fofo">
+        <form class="mt-3" id="container" id="cont2" method="get" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <fieldset class="form-group">
+                    <div class="row mb-3">
+                        <div class="col-md-2">
+                            <img src="/media/{{ user.profilePicture }}" class="img-fluid" alt="noimage" style="
+                            max-width: 18rem;
+                            max-height: 22rem;
+                            margin-top: 1.5rem;
+                            margin-left: 1rem;
+                            border-radius: 10px;" />
+                        </div>
+
+                        <div class="col-md-6" id="campo2" style="margin-left: 15rem">
+                            <label for="nombres"><strong>Nombre completo</strong></label>
+                            <input type="text" name="nombres" id="nombres" class="form-control" value="{{ user.name }}"
+                                readonly />
+
+                            <label for="email" style="margin-top: 0.5rem"><strong>Correo electronico</strong></label>
+                            <input type="text" name="email" id="email" class="form-control" value="{{ user.email }}"
+                                readonly />
+
+                            <label for="insti" style="margin-top: 0.5rem"><strong>Institución</strong></label>
+                            <input type="text" name="apellidos" id="apellidos" class="form-control" value="ICESI"
+                                readonly />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <div class="row mb-3">
+                        <div class="col-md-6" id="campo2">
+                            <label for="programa"><strong>Programa</strong></label>
+                            <input type="text" name="programa" id="programa" class="form-control" value="" readonly />
+                        </div>
+
+                        <div class="col-md-6" id="campo2">
+                            <label for="periodoActual"><strong>Periodo actual</strong></label>
+                            <input type="number" name="periodoActual" id="periodoActual" class="form-control" min="1"
+                                max="20" required value="" readonly />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <div class="row mb-3">
+                        <div class="col-md-6" id="campo2">
+                            <label for="valorS"><strong>Valor del semestre</strong></label>
+                            <input type="number" name="valorS" id="valorS" class="form-control" min="1000"
+                                max="50000000" required value="" readonly />
+                        </div>
+
+                        <div class="col-md-6" id="campo2">
+                            <label for="totalPeriodos"><strong>Total periodos</strong></label>
+                            <input type="number" class="form-control" name="totalPeriodos" id="totalPeriodos" min="1"
+                                max="20" required value="" readonly />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <div class="row mb-3">
+                        <div class="col-md-6" id="campo2">
+                            <label for="estrato"><strong>Estrato Socioeconómico</strong></label>
+                            <input type="number" class="form-control" name="estrato" id="estrato" min="1" max="20"
+                                required value="" readonly />
+                        </div>
+
+                        <div class="col-md-6" id="campo2">
+                            <label for="estrato"><strong>Estado beneficiado</strong></label>
+                            <input type="text" class="form-control" name="estadoBeneficiado" id="estadoBeneficiado"
+                                required value="" readonly />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <label for="cartaMotivacional" id="campo2"><strong>Carta mativacional</strong></label>
+                    <div class="row mb-3">
+                        <div class="col-md-12" id="campo">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="15" name="cartaMotivacional" id="cartaMotivacional"
+                                    maxlength="2000" value="" readonly>
+
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="d-flex justify-content-center mt-3 mb-3">
+                <button type="submit" class="btn custom btn col-md-5" id="botonDonar">
+                    Aportar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    {% endblock %}
+    <!-- jQuery y Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

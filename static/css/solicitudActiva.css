@@ -1,0 +1,153 @@
+body{
+    background-color: #F0F7FF;
+}
+
+/*center title style*/
+
+#contTitulo{
+    background: #A4D955;
+    border-radius: 20px;
+    height: 9rem;
+}
+
+
+#titulo {
+    color: #FFFFFF;
+    opacity: 100%;
+    font-family:'Open Sans';
+    font-size: 2rem;
+    font-weight: bold;
+    margin-left: 3rem;
+
+} 
+
+#line{
+    height: 0.15rem;
+    opacity: 100%;
+    border: 0.094rem solid #FFFFFF;
+    background-color: #FFFFFF;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    margin-left: 2rem;
+
+}
+
+#graduatedImg{
+    float: right;
+    width: 20rem;
+    height:9rem;
+    background: url(.png);
+}
+
+/*form style*/
+.container{
+    
+    background-color: #fff;
+
+}
+
+
+#subtitulo{
+    
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.25rem;
+    line-height: 1.688rem;
+
+    color: #8A8A8A;
+}
+
+#subtitulo2{
+    
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.25rem;
+    line-height: 1.688rem;
+
+    color: #8A8A8A;
+}
+
+#line2{
+    border: 0.094px solid #8A8A8A;
+    background-color: #8A8A8A;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+}
+
+#campo {
+    margin-bottom: 1em;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-size: 1em;
+    color: #8A8A8A;
+}
+
+#campo label {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 43.75rem;
+    font-size: 0.938rem;
+    line-height: 1.688rem;
+    margin-bottom: 0.2em;
+    color: #8A8A8A;
+    display: block;
+}
+
+
+#campo input[type="text"], #campo input[type="email"],#campo input[type="number"], #campo input[type="file"], #campo select {
+    
+    border: 1px solid #558018;
+    box-shadow: 0.125rem 0.125rem 0.125rem rgba(0,0,0,0.2);
+    display: block;
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-size: 1em;
+    color: #8A8A8A;
+    border-radius: 0.5rem;
+    
+}
+
+
+
+#check {
+    padding: 0.2em;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-size: 1em;
+    color: #8A8A8A;
+    border-radius: 8px;
+}
+
+
+textarea{
+    border: 1px solid #558018;
+    border-radius: 8px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+#botonEnviar {
+    background-color: #f29f05; 
+    border-color: #f29f05; 
+    color: #fff; 
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-size: 1em;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  }
+ 
+  #botonEnviar:hover {
+    background-color: #A4D955; 
+    border-color: #A4D955; 
+    color: #fff; 
+    box-shadow: inset 2px 2px 2px rgba(0,0,0,0.2);
+    text-shadow: none;
+  }
+

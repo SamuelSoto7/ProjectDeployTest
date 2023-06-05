@@ -1,0 +1,167 @@
+{% extends 'base.html' %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Descripción de un beneficiario para aportar</title>
+    <link href="{% static '/beneficiaryToDonate.css' %}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+
+    {% block header %}
+    <link href="{% static '/beneficiaryToDonate.css' %}" rel="stylesheet" />
+    {% endblock %}
+</head>
+
+<body>
+    {% block content %}
+    <div class="container-fluid">
+    <div class="row mb-3 flex-sm-row" id="contTitulo">
+        <div class="col-md-9">
+            <br />
+            <h3 id="titulo" class="mt-2">Descripción del Aspirante</h3>
+            <hr id="line" class="w-80" />
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="d-flex justify-content-center">
+            <img src="../../../media/icons/fund.png" alt="No Encontrada" class="img-fluid d-none d-md-block"
+                id="graduatedImg" />
+            </div>
+        </div>
+    </div>
+
+
+    <!--- fields form-->
+    <div class="form " style="background-color: white; margin-left: 2%; border-radius: 3%;">
+        <div class="row mt-3" style="margin-left: 5%;">
+            <div class="col-lg-5 d-flex flex-column align-items-center mt-4 " >
+                <img src="/media/{{ scholarship.id_user.profilePicture }}" class="img-fluid" alt="noimage"
+                  style="max-width: 15rem; height: 13rem; border-radius: 10px; margin-right: 0.5rem;">
+
+
+                <div class="d-flex mt-3 ">
+                    <h5 style="color: #F29F05;">Periodos a Cursar: </h5>
+                    <h5 class="mx-2"> 
+                    {{ scholarship.total_periods }}
+                     </h5>
+                </div>
+                <div class="d-flex ">
+                    <h5 style="color: #F29F05;">Periodo Actual: </h5>
+                    <h5 class="mx-2"> 
+                    {{ scholarship.period_current }}
+                    </h5>
+                </div>
+               
+            </div>
+
+            <div class="col-lg-7  mt-4">
+                <div class="d-flex ">
+                    <h5 style="color: #F29F05;">Nombre: </h5>
+                    <h5 class="mx-2"> 
+                    {{ scholarship.id_user.name|capfirst }}
+                    </h5>
+                </div>
+                <div class="d-flex ">
+                    <h5 style="color: #F29F05;">Puntaje Icfes: </h5>
+                    <h5 class="mx-2"> 
+                    {{ scholarship.icfes_score }}
+                    </h5>
+                </div>
+                <div class="d-flex " >
+                    <h5 style="color: #F29F05;">Email: </h5>
+                    <p class="mx-2" style="font-weight:600; font-size: 1.2rem;" > 
+                    {{ scholarship.id_user.email }} 
+                    </p>
+                </div>
+                <div class="d-flex ">
+                    <h5 style="color: #F29F05;">Institucion: </h5>
+                    <h5 class="mx-2"> 
+                    {{ scholarship.institution.name }}
+                    </h5>
+                </div>
+                <div class="d-flex ">
+                    <h5 style="color: #F29F05;">Programa: </h5>
+                    <h5 class="mx-2"> 
+                    {{ scholarship.program_adm }}
+                    </h5>
+                </div>
+                <div class="d-flex ">
+                    <h5 style="color: #F29F05;">Estrato Social: </h5>
+                    <h5 class="mx-2"> 
+                    {{ scholarship.stratum }}
+                    </h5>
+                </div>
+                <div class="d-flex mt-4 ">
+                    <h5 style="color: #F29F05;">Valor Periodo: </h5>
+                    <h5 class="mx-2"> 
+                    $ {{ scholarship.value_period }}
+                    </h5>
+                </div>
+                <div class="d-flex">
+                    <h6 style="color: #F29F05;">Tipo de Estudiante: </h6>
+                    {% if scholarship.application_type == 'NI' %}
+                      <h6>Soy estudiante de nuevo ingreso</h6>
+                    {% else %}
+                      <h6>Soy estudiante antiguo</h6>
+                    {% endif %}
+                  </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4 mb-4">
+            <div class="col-lg-10 d-flex flex-column align-items-center">
+              <h5 style="text-align: left; color: #F29F05;">Carta Motivacional</h5>
+              <textarea class="form-control " rows="13" id="cartaMotivacional"
+                        maxlength="2000" value="" readonly style="border: 1.5px solid gray; border-radius:1rem">{{ scholarship.motivational_letter }}</textarea>
+            </div>
+
+            
+            {% if user.role == user.NATURALDONOR or  user.role == user.LEGALDONOR or user.role == user.INSTITUTION  %}
+            <a type="submit" href="{% url 'scholarships:donationSch' scholarship.id %}" class="btn custom btn col-md-5 mt-4 mb-5" id="botonDonar">
+                Aportar
+            </a>
+            {% elif user.role == 5 %}
+            {% if scholarship.state == 'Pendiente' or scholarship.state == 'P'  %}
+                <div class="col-12">
+                    <form method="post" action="{% url 'scholarships:scholarships' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="scholarship_id" value="{{ scholarship.id }}">
+                        <button type="submit" name="action" id="rechazarBTN" value="rechazar" class="btn custom btn col-md-5 mt-4 mb-5" >Rechazar</button>
+                        <button type="submit" name="action" id="publicarBTN" value="publicar" class="btn custom btn col-md-5 mt-4 mb-5" >Publicar</button>
+                    </form>
+                </div>
+            {% elif scholarship.state == 'Rechazada' or scholarship.state == 'R'  %}
+            <div class="col-12">
+                <form method="post" action="{% url 'scholarships:scholarships' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="scholarship_id" value="{{ scholarship.id }}">
+                    <button type="submit" name="action" id="publicarBTN" value="publicar" class="btn custom btn col-md-5 mt-4 mb-5">Hacer pública</button>
+                </form>
+            </div>
+            {% elif scholarship.state == 'Aceptada' or scholarship.state == 'A' %}
+            <div class="col-12">
+                <form method="post" action="{% url 'scholarships:scholarships' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="scholarship_id" value="{{ scholarship.id }}">
+                    <button type="submit" name="action" id="rechazarBTN" value="rechazar" class="btn custom btn col-md-5 mt-4 mb-5">Rechazar la publicación</button>
+                </form>
+            </div>
+            {% endif %} 
+            {% endif %}
+
+
+          </div>
+    </div>
+    </div>
+   
+    {% endblock %}
+    <!-- jQuery y Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

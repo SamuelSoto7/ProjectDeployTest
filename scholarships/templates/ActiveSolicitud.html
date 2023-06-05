@@ -1,0 +1,244 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitud Activa</title>
+  <link href="{% static '/solicitudActiva.css' %}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+  {% block header %}
+  <link href="{% static '/solicitudActiva.css' %}" rel="stylesheet">
+  {% endblock %}
+</head>
+
+<body>
+
+  {% block content %}
+
+  {% if solicitud_activa %}
+  <div class="row mb-3 flex-sm-row" id="contTitulo">
+    <div class="col-md-8">
+      <br>
+      <h1 id="titulo" class="mt-2">Solicitud activa</h1>
+      <hr id="line" class="w-80">
+    </div>
+    <div class="col-md-4">
+      <img src="../../media/icons/HigherEducation.png" alt="No Encontrada" class="img-fluid d-none d-md-block"
+        id="graduatedImg" />
+    </div>
+  </div>
+  <div class="row" id="fofo">
+    <div class="row">
+      <label for="subtitulo" id="subtitulo"><strong>Datos</strong></label>
+      <hr id="line2">
+    </div>
+
+    <form class="mt-3" id="container" id="cont2" action="/scholarships/editSolicitudActiva/" method="get"
+      enctype="multipart/form-data">
+      {% csrf_token %}
+
+
+      <div class="form-group">
+        <fieldset class="form-group">
+          <div class="row mb-3">
+            <div class="col-md-6" id="campo">
+              <label for="nombres"><strong>Nombre completo</strong></label>
+              <input type="text" name="nombres" id="nombres" class="form-control"
+                value="{{ solicitud_activa.id_user.name }}" disabled="">
+            </div>
+            <div class="col-md-6" id="campo">
+              <label for="apellidos"><strong>Correo electronico</strong></label>
+              <input type="text" name="apellidos" id="apellidos" class="form-control"
+                value="{{ solicitud_activa.id_user.email }}" disabled="">
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="form-group">
+          <div class="row mb-3">
+            <div class="col-md-6" id="campo">
+              <label for="tipodoc"><strong>Tipo de documento</strong></label>
+              <select id="tipodoc" class="form-control" name="tipoid" disabled="">
+                <!--<option selected disabled=""  value="{{ solicitud_activa.id_user.idType }}"> {{ solicitud_activa.id_user.idType }} </option>
+                    <option disabled="" >Tarjeta de identidad</option>
+                    <option disabled="" >Cédula de ciudadania</option>
+                    <option disabled="" >Cédula extranjera</option> 
+
+                    NO SE PUEDE EDITAR LOS DATOS DEL USUARIO DESDE LA SOLICITUD DE BECA -->
+
+                <option selected>
+                  {% if solicitud_activa.id_user.idType == 1 %}
+                  Tarjeta identidad
+                  {% elif solicitud_activa.id_user.idType == 2 %}
+                  Cédula de Ciudadanía
+                  {% elif solicitud_activa.id_user.idType == 3 %}
+                  Cédula extranjera
+                  {% else %}
+                  NIT
+                  {% endif %}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-6" id="campo">
+              <label for="numdoc"><strong>Número de documento</strong></label>
+              <input type="number" name="numdoc" id="numdoc" class="form-control"
+                value="{{ solicitud_activa.id_user.numID }}" disabled="">
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="form-group">
+          <div class="row mb-3">
+            <div class="col-md-6" id="campo">
+              <label for="insti"><strong>Institución</strong></label>
+              <select id="insti" class="form-control" required name="instituc" readonly>
+                <option value="{{ solicitud_activa.institution.id }}" selected>
+                  {{ solicitud_activa.institution.name }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-6" id="campo">
+              <label for="programa"><strong>Programa</strong></label>
+              <input type="text" name="programa" id="programa" class="form-control"
+                value="{{ solicitud_activa.program_adm }}" readonly>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="form-group">
+          <div class="row mb-3">
+            <div class="col-md-6" id="campo">
+              <label for="valorS"><strong>Valor del periodo</strong></label>
+              <input type="number" name="valorS" id="valorS" class="form-control" min="1000" max="50000000" required
+                value="{{ solicitud_activa.value_period }}" readonly>
+            </div>
+            <div class="col-md-6" id="campo">
+              <label for="periodoActual"><strong>Periodo actual</strong></label>
+              <input type="number" name="periodoActual" id="periodoActual" class="form-control" min="1" max="20"
+                required value="{{ solicitud_activa.period_current }}" readonly>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <div class="row mb-3">
+            <div class="col-md-6" id="campo">
+              <label for="totalPeriodos"><strong>Total periodos</strong></label>
+              <input type="number" class="form-control" name="totalPeriodos" id="totalPeriodos" min="1" max="20"
+                required value="{{ solicitud_activa.total_periods }}" readonly>
+            </div>
+            <div class="col-md-6" id="campo">
+              <label for="puntajeI"><strong>Puntaje ICFES</strong></label>
+              <input type="number" class="form-control" name="puntajeI" id="puntajeI" min="0" max="500"
+                placeholder="{{ solicitud_activa.icfes_score }}" readonly>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="form-group">
+          <div class="row mb-3">
+            <div class="col-md-6" id="campo">
+              <label for="estrato"><strong>Estrato Socioeconómico</strong></label>
+              <select class="form-control" id="estrato" required name="estrato" aria-readonly="true">
+                <option selected value="{{ solicitud_activa.stratum }}">{{ solicitud_activa.stratum }}</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+              </select>
+            </div>
+            <div class="col-md-6" id="campo">
+              <label><strong>Seleccione:</strong></label>
+              {% if solicitud_activa.application_type == 'NI' %}
+
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="radio1" name="ingresoEstudiante" value='NI' checked
+                  disabled>
+                <label class="form-check-label" for="radio1">Soy estudiante de nuevo ingreso</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="radio2" name="ingresoEstudiante" value='A' disabled>
+                <label class="form-check-label" for="radio2">Soy estudiante antiguo</label>
+              </div>
+              {% elif solicitud_activa.application_type == 'A' %}
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="radio1" name="ingresoEstudiante" value='NI' disabled>
+                <label class="form-check-label" for="radio1">Soy estudiante de nuevo ingreso</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="radio2" name="ingresoEstudiante" value='A' checked
+                  disabled>
+                <label class="form-check-label" for="radio2">Soy estudiante antiguo</label>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-group">
+          <br>
+          <label for="subtitulo2" id="subtitulo2"><strong>Archivos cargados</strong></label>
+          <hr>
+
+        </div>
+        <fieldset class="form-group">
+          <div class="row mb-3">
+            <div class="col-md-12" id="campo">
+              <label><strong>Documento de identidad</strong></label>
+              <a href="{{ solicitud_activa.photocopy_id.url }}" target="_blank">{{ solicitud_activa.photocopy_id.name
+                }}</a>
+              <!--<div class="custom-file">
+                    <input type="file" class="form-control " name="src-file1" accept=".pdf" id="docIdFile" 
+                    value="{{ solicitud_activa.photocopy_id.url }}" disabled="">
+                  </div>-->
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-12" id="campo">
+              <label><strong>Certificado de admisión</strong></label>
+              <a href="{{ solicitud_activa.certificate.url }}" target="_blank">{{ solicitud_activa.certificate.name
+                }}</a>
+              <!--<div class="custom-file">
+                    <input type="file" class="form-control" name="src-file2" accept=".pdf" id="certificadoFile"
+                    value="{{ solicitud_activa.certificate.url }}" disabled="">
+                  </div>-->
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="form-group">
+
+          <label for="cartaMotivacional" id="subtitulo2"><strong>Carta mativacional</strong></label>
+          <hr>
+          <div class="row mb-3">
+            <div class="col-md-12" id="campo">
+              <div class="form-group">
+                <textarea class="form-control" rows="15" name="cartaMotivacional" id="cartaMotivacional"
+                  maxlength="2000" value="{{ solicitud_activa.motivational_letter }}"
+                  readonly> {{ solicitud_activa.motivational_letter }}</textarea>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+
+      <div class="d-flex justify-content-center mt-3 mb-3">
+        <button type="submit" class="btn custom btn col-md-5" id="botonEnviar">Editar solicitud</button>
+      </div>
+    </form>
+  </div>
+  {% endif %}
+  {% endblock %}
+  <!-- jQuery y Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

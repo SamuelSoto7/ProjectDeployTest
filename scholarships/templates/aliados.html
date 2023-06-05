@@ -1,0 +1,124 @@
+<!-- institutions.html -->
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}
+Aliados
+{% endblock %}
+
+{% block content %}
+<link href="{% static '/aliados.css' %}" rel="stylesheet">
+<link href="{% static '_base.css' %}" rel="stylesheet">
+<div class="container">
+  <div class="row md-6" id="rowTitle">
+    <h1>Instituciones de educación superior aliadas</h1>
+    <p>Aquí encontrarás las instituciones de educación superior con las que tenemos el placer de tener convenios. Estas alianzas nos permiten ofrecerte oportunidades y beneficios exclusivos mientras persigues tus metas académicas. Explora nuestra selección de instituciones y descubre las opciones que tenemos disponibles para ti. ¡Estamos emocionados de ser parte de tu camino hacia el éxito educativo!</p>
+  </div>
+
+  <div class="row" id="containerCarrusel">
+    <br>
+    <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleSlidesOnly">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <br>
+          <div class="row">
+            {% for institution in institutions %}
+            {% if institution.verificationState == 'A' %}
+            <div class="col-lg-4">
+              <div class="card">
+                <div class="box front">
+                  {% if institution.profilePicture %}
+                  <img alt="{{ institution.name }}" src="{{ institution.profilePicture.url }}">
+                  {% else %}
+                  <img alt="Imagen por defecto" src="/media/users/profile_default.png">
+                  {% endif %}
+                  <h2>{{ institution.name }}</h2>
+                  <h4>{{ institution.position }}</h4>
+                  <p class="socials">
+                    <i class="fa fa-facebook"></i>
+                    <i class="fa fa-twitter"></i>
+                    <i class="fa fa-linkedin"></i>
+                    <i class="fa fa-youtube"></i>
+                  </p>
+                </div>
+                <div class="box back">
+                  <span class="fa fa-quote-left"></span>
+                  <p>
+                    {{ institution.description }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" id="knowledgePeopleSection">
+    <div class="col-md-12">
+      <div class="knowledge-people-section">
+        <h2>Ventajas de Knowledge People y sus convenios</h2>
+        <div class="advantages-grid">
+          <div class="advantage">
+            <i class="fa fa-graduation-cap"></i>
+            <h3>Oportunidades educativas</h3>
+            <p>Acceso a una amplia variedad de instituciones de educación superior aliadas para los beneficiarios de Dreamsbank.</p>
+          </div>
+          <div class="advantage">
+            <i class="fa fa-money"></i>
+            <h3>Financiamiento de estudios</h3>
+            <p>Posibilidad de financiar los estudios de estudiantes admitidos en instituciones de educación superior mediante donaciones de personas solidarias.</p>
+          </div>
+          <div class="advantage">
+            <i class="fa fa-globe"></i>
+            <h3>Programas de intercambio</h3>
+            <p>Participación en programas de intercambio estudiantil con otras instituciones de educación superior a nivel nacional e internacional.</p>
+          </div>
+          <div class="advantage">
+            <i class="fa fa-users"></i>
+            <h3>Red de contactos</h3>
+            <p>Creación de una sólida red de contactos con estudiantes, profesores y profesionales de las instituciones aliadas.</p>
+          </div>
+          <div class="advantage">
+            <i class="fa fa-link"></i>
+            <h3>Participación en otros módulos</h3>
+            <p>Al participar en Knowledge People, existe la posibilidad de acceder y participar en los otros módulos que ofrece Dreamsbank para maximizar las oportunidades educativas y de apoyo financiero.</p>
+          </div>
+          <div class="advantage">
+            <i class="fas fa-certificate"></i>
+            <h3>Reconocimiento y logros</h3>
+            <p>Obtén reconocimiento y destaca tus logros académicos con el respaldo de las instituciones aliadas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="institution-section text-center" >
+    <h1 id="institution-title">¿Eres una institución de educación superior <br> y estás interesado en ser institución aliada?</h1>
+    <div class="card-container" id="card-container">
+      <div class="card" id="card">
+        <i class="fas fa-users" id="increase-icon"></i>
+        <h3>Aumenta el número de matrículas y la satisfacción de los estudiantes.</h3>
+      </div>
+      <div class="card" id="card">
+        <i class="fas fa-graduation-cap" id="quality-icon"></i>
+        <h3>Concéntrate en brindar educación de alta calidad a los estudiantes.</h3>
+      </div>
+      <div class="card" id="card">
+        <i class="fas fa-hand-holding-usd" id="reduction-icon"></i>
+        <h3>Reduce la deserción teniendo en cuenta el costo de la matrícula y a través del seguimiento continuo a estudiantes.</h3>
+      </div>
+      <div class="card" id="card">
+        <i class="fas fa-donate" id="funding-icon"></i>
+        <h3>Acceso a una amplia red de donantes y financiamiento para programas de becas.</h3>
+      </div>
+    </div>
+    <a href="/../users/signupIns" class="btn-join" id="join-button">¡Únete Ahora!</a>
+  </div>
+  
+
+</div>
+{% endblock %}

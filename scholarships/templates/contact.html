@@ -1,0 +1,103 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}
+Información de contacto
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'contact.css' %}">
+<link href="{% static '_base.css' %}" rel="stylesheet">
+<div class="container">
+    <br><br>
+    <div class="row">
+        
+           
+                <div class="col-md-6">
+                    <img src="../../media/images/contact.jpg" alt="Foto_contacto" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <h2>Contáctate con nosotros</h2>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    <form method="post" action="/scholarships/contact/">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Nombre:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono:</label>
+                            <input type="text" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje:</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <div class="form-group button-container">
+                            <button type="submit"><i class="fa-regular fa-paper-plane"></i> Enviar </button>
+                        </div>
+                    </form>
+                </div>
+           
+       
+
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>Encuéntranos en:</h2>
+                    <div id="map" style="height: 400px; border-radius: 5px;"></div>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-WZQlAtx-eFzTsB0298N98NNFM0jXGRQ&callback=iniciarMap"></script>
+                    <script>
+                        function iniciarMap() {
+                            var location = {lat:3.4791523,lng: -76.5283242}; // Coordenadas de la ubicación del mapa
+
+                            var map = new google.maps.Map(document.getElementById('map'), {
+                                center: location,
+                                zoom: 18
+                            });
+
+                            var marker = new google.maps.Marker({
+                                position: location,
+                                map: map,
+                                title: 'Ubicación'
+                            });
+                        }
+
+                        window.onload = function() {
+                            iniciarMap();
+                        };
+                    </script>
+                </div>
+                <div class="col-md-4">
+                    <br> <br>
+                    <div class="social-media">
+                        <span class="address">
+                            <i class="fa fa-map-marker-alt"></i>
+                            <p>Structum,Cl 40 N 6 A 20 Suite 303,Cali</p>
+                        </span> <br> 
+                        <span class="phone">
+                            <i class="fa fa-phone"></i>
+                            <p class="phone-link"><a href="tel:+123456789">+123456789</a></p>
+
+                        </span> <br> 
+                        <a href="#" class="social-link"><i class="fa fa-facebook"></i></a><span class="social-label">DreamsBank -Knowlegde People</span><br><br>
+                        <a href="#" class="social-link"><i class="fa fa-twitter"></i></a><span class="social-label">@DB.KnowledgePeople</span><br><br>
+                        <a href="#" class="social-link"><i class="fa fa-instagram"></i></a><span class="social-label">@DB.KnowledgePeople</span><br><br>
+                        <a href="#" class="social-link"><i class="fa fa-linkedin"></i><span class="social-label">DreamsBank Knowledge People</span></a><br><br>
+                    </div>
+                    </div>
+                </div>
+                
+            </div>
+            <br>
+       
+    </div>
+</div>
+{% endblock %}

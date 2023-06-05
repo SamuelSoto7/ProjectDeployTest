@@ -1,0 +1,28 @@
+body {
+  background-color: #f0f7ff;
+  margin-top: 0px;
+}
+#contTitulo {
+  background-color: #a4d955;
+  border-radius: 20px;
+  height: 9rem;
+}
+#titulo {
+  color: #ffffff;
+  opacity: 100%;
+  font-family: "Open Sans";
+  font-size: 2rem;
+  font-weight: bold;
+  margin-left: 3rem;
+}
+
+.howreqletter{
+    
+    
+    color: #F29F05;
+    font-family:'Open Sans';
+    font-size: 1.2rem;
+    font-weight: bold;
+    
+}
+

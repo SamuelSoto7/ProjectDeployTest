@@ -1,0 +1,59 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+
+<link href="{% static 'signup.css' %}" rel="stylesheet">
+<link href="{% static '_base.css' %}" rel="stylesheet">
+
+</div class="container-fluid">
+
+<div class="container-lg"> <!--Container White with border Black-->
+    <div class="row g-3 mt-3">
+        <div class="col-6"> <!--Form column-->
+            <div class="row">
+                <div class="col-12" id="titleDreamsBank"> <!--Title-->
+                    <p>Dreamsbank</p>
+                </div>
+                <div class="col-12">
+                    <p id="subtitleCreateAccount">
+                        Crear tu cuenta de DreamsBank
+                    <p>
+                </div>
+                <div class="col-6">
+                    <p id="mandatoryObligatory"> <img src="../../media/icons/Asterisk.png" alt="Asterisk image"
+                            width="10" height="10" id="AsteriskImg" /> Obligatorio</p>
+                </div>
+            </div>
+            <form method="post"  enctype=multipart/form-data>
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" id="registersingup">Registrarse</button>
+            </form>  
+          </div> 
+        <div class="col-6" id="icon-Lema">
+            <div class="row">
+                <div class="col-12">
+                    <img src="../../media/icons/dreamsbank.jpeg" class="img-fluid" alt="No Encontrada" width="224"
+                        height="144" id="iconLema" />
+                </div>
+            </div>
+            <div class="row">
+                <div class=col-12>
+                    <p>
+                        <span id="p1"> La plataforma </span>
+                        <br>
+                        <span id="p2">donde tus sueños </span>
+                        <br>
+                        <span id="p3">se hacen realidad </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
