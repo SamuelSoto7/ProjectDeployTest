@@ -148,10 +148,10 @@ if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),)
+    os.path.join(BASE_DIR, 'static'))
 
  
 
