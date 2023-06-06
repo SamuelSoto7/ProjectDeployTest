@@ -60,7 +60,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'knowledge_people.urls'
+ROOT_URLCONF = 'projectdeploytest.urls'
 
 TEMPLATES = [
     {
@@ -79,7 +79,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'knowledge_people.wsgi.application'
+WSGI_APPLICATION = 'projectdeploytest.wsgi.application'
 
 
 # Database
