@@ -152,7 +152,7 @@ if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
     
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'static', 'appname'),
+    os.path.join(BASE_DIR, 'static', 'projectdeploytest'),
 )
 
  
